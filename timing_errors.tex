@@ -1,0 +1,143 @@
+%% LyX 1.6.9 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[prl,onecolumn,showpacs,preprintnumbers,amsmath,amssymb]{revtex4-1}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amssymb}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+\makeatother
+
+
+
+\begin{document}
+
+\section{Measuring skewed operators}
+
+We consider the case where we aim to measure the pauli Z operator,
+but instead measure in some slightly rotated basis $\cos\theta Z+\sin\theta X$.
+The projection into this rotated basis, can be viewed as a rotation
+of the state, followed by the ideal Z projection, followed by an inverse
+rotation. 
+
+\[
+P\left(\theta\right)=R^{\dagger}\left(\theta\right)\hat{P}_{Z}R\left(\theta\right)\]
+
+
+Where $P_{Z}$ and $P\mbox{\ensuremath{\left(\theta\right)}}$ are
+taken to be even projection operators into the bases $Z$ and $\cos\theta Z+\sin\theta X$,
+the rotation operator $R\left(\theta\right)=R_{y}\left(\theta\right)=\cos\frac{\theta}{2}\mathbb{I}-i\sin\frac{\theta}{2}Y$.
+writing $C=\cos\frac{\theta}{2}$ and $S=\sin\frac{\theta}{2}$ ,
+
+\begin{eqnarray*}
+P\left(\theta\right) & = & C^{2}P_{Z}+S^{2}YP_{Z}Y+iSC\left[YP_{Z}-P_{Z}Y\right]\\
+ & = & C^{2}P_{Z}+S^{2}Y^{2}P_{Z,odd}+iSC\left[YP_{Z}-YP_{Z,odd}\right]\end{eqnarray*}
+
+
+By using the relationship $P_{Z}Y=YP_{Z,odd}$ we can write this projector
+in two equivalent ways: 
+
+\begin{eqnarray*}
+P\left(\theta\right) & = & C^{2}P_{Z}+S^{2}P_{Z,odd}+iSCY\left[P_{Z}-P_{Z,odd}\right]\\
+P\left(\theta\right) & = & C^{2}P_{Z}+S^{2}P_{Z,odd}+iSC\left[P_{Z,odd}-P_{Z}\right]Y\end{eqnarray*}
+
+
+If an observed even measurement outcome corresponds to the projector
+$P\left(\theta\right)$being applied to the state with probability
+$q\left(\theta\right)$ then we can write the resultant state as:
+\begin{eqnarray*}
+\rho_{measured} & = & \int q\left(\theta\right)R^{\dagger}\left(\theta\right)P_{Z}R\left(\theta\right)\rho R^{\dagger}\left(\theta\right)P_{Z}R\left(\theta\right)d\theta\end{eqnarray*}
+
+
+expanding this expression, and 
+
+\begin{eqnarray*}
+\rho_{measured} & = & \int q\left(\theta\right)P\left(\theta\right)\rho P\left(\theta\right)d\theta\\
+ &  & \left\{ C^{2}P_{Z}+S^{2}P_{Z,odd}+iSCY\left[P_{Z}-P_{Z,odd}\right]\right\} \rho\left\{ C^{2}P_{Z}+S^{2}P_{Z,odd}+iSC\left[P_{Z,odd}-P_{Z}\right]Y\right\} \\
+ & = & C^{4}P_{Z}\rho P_{Z}+S^{4}\hat{P_{Z,odd}}\rho\hat{P_{Z,odd}}\\
+ &  & +iC^{3}S\left[P_{Z}\rho P_{Z,odd}Y-P_{Z}\rho P_{Z}Y+YP_{Z}\rho P_{Z}-YP_{Z,odd}\rho P_{Z}\right]\\
+ &  & +C^{2}S^{2}[P_{Z}\rho P_{Z,odd}+P_{Z,odd}\rho P_{Z}-YP_{Z}\rho P_{Z,odd}Y+YP_{Z,odd}\rho P_{Z,odd}Y\\
+ &  & \ \ \ \ \ \ \ \ \ \  \  +YP_{Z}\rho P_{Z}Y -YP_{Z,odd}\rho P_{Z}Y]\\
+ &  & +iCS^{3}\left[P_{Z,odd}\rho P_{Z,odd}Y-P_{Z,odd}\rho P_{Z}Y+YP_{Z}\rho P_{Z,odd}-YP_{Z,odd}\rho P_{Z,odd}\right]\end{eqnarray*}
+Label $\rho_{even}=P_{Z}\rho P_{Z}$, and $\rho_{odd}=P_{Z,odd}\rho P_{Z,odd}$,
+then 
+
+\begin{eqnarray*}
+\rho_{measured} & = & \int q\left(\theta\right)P\left(\theta\right)\rho P\left(\theta\right)d\theta\\
+ &  & C^{4}\rho_{even}+S^{4}\rho_{odd}\\
+ &  & +iC^{3}S\left[-\rho_{even}Y+Y\rho_{even}-YP_{Z,odd}\rho P_{Z}+P_{Z}\rho P_{Z,odd}Y\right]\\
+ &  & +C^{2}S^{2}\left[Y\rho_{odd}Y+Y\rho_{even}Y+P_{Z}\rho P_{Z,odd}+P_{Z,odd}\rho P_{Z}-YP_{Z}\rho P_{Z,odd}Y-YP_{Z,odd}\rho P_{Z}Y\right]\\
+ &  & +iCS^{3}\left[-Y\rho_{odd}+\rho_{odd}Y-P_{Z,odd}\rho P_{Z}Y+YP_{Z}\rho P_{Z,odd}\right]\end{eqnarray*}
+
+
+
+\subsection*{Assume $q\left(\theta\right)$ is symmetric about $\theta=0$}
+
+Now all the assymetric terms in the integral vanish, and we are left
+with
+
+\begin{eqnarray*}
+\rho_{measured} & = & \int q\left(\theta\right)\{C^{4}\rho_{even}+S^{4}\rho_{odd}+C^{2}S^{2}\left[Y\rho_{odd}Y+Y\rho_{even}Y\right]\\
+ &  & +C^{2}S^{2}\left[P_{Z}\rho P_{Z,odd}+P_{Z,odd}\rho P_{Z}-YP_{Z}\rho P_{Z,odd}Y-YP_{Z,odd}\rho P_{Z}Y\right]\}d\theta\end{eqnarray*}
+
+
+Apply Z with 50\% probability - this introduces a sign in any $P_{Z,odd}$
+operations, then the second line of terms in the equation above cancel
+to leave: 
+
+\[
+\rho_{measured}=\mbox{\ensuremath{\left[\int q\left(\theta\right)C^{4}d\theta\right]}}\rho_{even}+\left[\int q\left(\theta\right)S^{4}d\theta\right]\rho_{odd}+\left[\int q\left(\theta\right)C^{2}S^{2}d\theta\right]\left[Y\rho_{odd}Y+Y\rho_{even}Y\right]\]
+
+
+So we can write the resultant channel as a superoperator 
+
+\[
+\mathcal{S}\left(\rho\right)=\sum p_{i}K_{i}\rho K_{i}^{\dagger}\]
+
+
+With the following probabilities and Kraus operators: 
+
+\begin{tabular}{|c|c|}
+\hline 
+ & \tabularnewline
+\hline
+\hline 
+$p_{9}=\mbox{\ensuremath{\left[\int q\left(\theta\right)C^{4}d\theta\right]}}$ & $K_{0}=P_{Z}$\tabularnewline
+\hline 
+$p_{1}=\left[\int q\left(\theta\right)S^{4}d\theta\right]$ & $K_{1}=P_{Z,odd}$\tabularnewline
+\hline 
+$p_{2}=\left[\int q\left(\theta\right)C^{2}S^{2}d\theta\right]$ & $K_{2}=YP_{Z,odd}$\tabularnewline
+\hline 
+$p_{3}=\left[\int q\left(\theta\right)C^{2}S^{2}d\theta\right]$ & $K_{3}=YP_{Z}$\tabularnewline
+\hline
+\end{tabular}
+
+
+\subsection{Case of systematic errors }
+
+If systematic error is present then the probability function, $q_{sys}\left(\theta\right)$,
+describing the distribution of the error does not average to zero,
+but rather $\int q_{sys}\left(\theta\right)d\theta=\bar{\theta}$.
+By changing variables to $\phi=\theta-\bar{\theta}$
+
+\begin{eqnarray*}
+\rho_{measured} & = & \int_{\theta}q_{sys}\left(\theta\right)P\left(\theta\right)\rho P\left(\theta\right)d\theta\\
+ & = & \int_{\phi}q_{sys}\left(\phi+\bar{\theta}\right)P\left(\phi+\bar{\theta}\right)\rho P\left(\phi+\bar{\theta}\right)d\phi\\
+ & = & \int_{\phi}q_{rand}\left(\phi\right)R^{\dagger}\left(\phi+\bar{\theta}\right)\hat{P}_{Z}R\left(\phi+\bar{\theta}\right)\rho R^{\dagger}\left(\phi+\bar{\theta}\right)\hat{P}_{Z}R\left(\phi+\bar{\theta}\right)d\phi\\
+ & = & R\left(\bar{\theta}\right)\left\{ \int_{\phi}q_{rand}\left(\phi\right)R^{\dagger}\left(\phi\right)\hat{P}_{Z}R\mbox{(\ensuremath{\phi})}\rho_{\bar{\theta}}R^{\dagger}\left(\phi\right)\hat{P}_{Z}R\left(\phi\right)d\phi\right\} R^{\dagger}\left(\bar{\theta}\right)\\
+ & = & R\left(\bar{\theta}\right)\left\{ \int_{\phi}q_{rand}\left(\phi\right)P\left(\phi\right)\rho_{\bar{\theta}}P\left(\phi\right)d\phi\right\} R^{\dagger}\left(\bar{\theta}\right)\end{eqnarray*}
+
+
+where $\rho_{\bar{\theta}}=R\mbox{(\ensuremath{\bar{\theta)}\rho}}R^{\dagger}\mbox{(\ensuremath{\bar{\theta)}}}$
+
+So with systematic errors, we can also write the effect as a superoperators
+where a fixed rotation is followed by an application of random errors
+which average to zero. 
+
+
+\end{document}
