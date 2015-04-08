@@ -1,113 +1,164 @@
-%% LyX 1.6.9 created this file.  For more info, see http://www.lyx.org/.
-%% Do not edit unless you really know what you are doing.
-\documentclass[prl,onecolumn,showpacs,preprintnumbers,amsmath,amssymb]{revtex4-1}
-\usepackage[T1]{fontenc}
-\usepackage[latin9]{inputenc}
-\usepackage{amssymb}
+\documentclass[prl, twocolumn, ,superscriptaddress]{revtex4-1}
 
-\makeatletter
+\usepackage{graphicx}
+\usepackage{xcolor}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
-%% Because html converters don't know tabularnewline
-\providecommand{\tabularnewline}{\\}
-
-\makeatother
-
-
+\newcommand{\letter}{Manuscript}
 
 \begin{document}
+\title{Surface code quantum computing in a network with timing errors}
 
-\section{Measuring skewed operators}
+\author{Joe O'Gorman}
+\affiliation{Department of Materials, Oxford University}
+\author{Naomi H. Nickerson}
+\email{n.nickerson11@imperial.ac.uk}
+\affiliation{Quantum Optics and Laser Science, Blackett Laboratory, Imperial College London, Prince Consort Road, London SW7 2AZ, United Kingdom}
 
-We consider the case where we aim to measure the pauli Z operator,
-but instead measure in some slightly rotated basis $\cos\theta Z+\sin\theta X$.
-The projection into this rotated basis, can be viewed as a rotation
-of the state, followed by the ideal Z projection, followed by an inverse
-rotation. 
+
+\begin{abstract}
+A networked approach to quantum computing made up of small cells of well controlled qubits, 
+connected together by long range photonics connections has been shown to be a reasonable 
+approach to achieinvg scalability with matter based qubit systems, such as trapped ions.  
+This approach overcomes many of the challenges faced by matter based qubit systems allowing
+ complex architectures, long range connections, and ... without any increased complexity in the
+  cell design. Performing operations across the network - such as the four-body measurements
+   required to implement the surface code - require the ability to keep time between remote cells. 
+   Here we identify the nature of errors that arise from inaccurate time keeping, and find thresholds
+    for what level of inaccuracy can be tolerated by error correction with the surface code. 
+\end{abstract}
+
+\maketitle
+
+
+Error correcting codes, such as the surface code, are based on the repeated projective measurement 
+of the stabilizers of the code. In order to understand how timing errors will affect the implementation the code, 
+we must identify how these parity measurements will be affected. We consider the case where we aim to 
+measure the Pauli $Z$ operator on a single qubit, but instead measure in some slightly rotated basis 
+$\cos\theta Z+\sin\theta X$. The projection into this rotated basis, can be viewed as a rotation
+of the state, followed by the ideal Z projection, and a finally a rotation back into the original basis. 
+Thus we can write this rotated projection as,
 
 \[
 P\left(\theta\right)=R^{\dagger}\left(\theta\right)\hat{P}_{Z}R\left(\theta\right)\]
 
 
 Where $P_{Z}$ and $P\mbox{\ensuremath{\left(\theta\right)}}$ are
-taken to be even projection operators into the bases $Z$ and $\cos\theta Z+\sin\theta X$,
+taken to be even projection operators into the bases $Z$ and $\cos\theta Z+\sin\theta X$ respectively, and 
 the rotation operator $R\left(\theta\right)=R_{y}\left(\theta\right)=\cos\frac{\theta}{2}\mathbb{I}-i\sin\frac{\theta}{2}Y$.
-writing $C=\cos\frac{\theta}{2}$ and $S=\sin\frac{\theta}{2}$ ,
-
-\begin{eqnarray*}
-P\left(\theta\right) & = & C^{2}P_{Z}+S^{2}YP_{Z}Y+iSC\left[YP_{Z}-P_{Z}Y\right]\\
- & = & C^{2}P_{Z}+S^{2}Y^{2}P_{Z,odd}+iSC\left[YP_{Z}-YP_{Z,odd}\right]\end{eqnarray*}
-
-
-By using the relationship $P_{Z}Y=YP_{Z,odd}$ we can write this projector
-in two equivalent ways: 
-
-\begin{eqnarray*}
-P\left(\theta\right) & = & C^{2}P_{Z}+S^{2}P_{Z,odd}+iSCY\left[P_{Z}-P_{Z,odd}\right]\\
-P\left(\theta\right) & = & C^{2}P_{Z}+S^{2}P_{Z,odd}+iSC\left[P_{Z,odd}-P_{Z}\right]Y\end{eqnarray*}
-
-
-If an observed even measurement outcome corresponds to the projector
-$P\left(\theta\right)$being applied to the state with probability
-$q\left(\theta\right)$ then we can write the resultant state as:
-\begin{eqnarray*}
-\rho_{measured} & = & \int q\left(\theta\right)R^{\dagger}\left(\theta\right)P_{Z}R\left(\theta\right)\rho R^{\dagger}\left(\theta\right)P_{Z}R\left(\theta\right)d\theta\end{eqnarray*}
-
-
-expanding this expression, and 
-
-\begin{eqnarray*}
-\rho_{measured} & = & \int q\left(\theta\right)P\left(\theta\right)\rho P\left(\theta\right)d\theta\\
- &  & \left\{ C^{2}P_{Z}+S^{2}P_{Z,odd}+iSCY\left[P_{Z}-P_{Z,odd}\right]\right\} \rho\left\{ C^{2}P_{Z}+S^{2}P_{Z,odd}+iSC\left[P_{Z,odd}-P_{Z}\right]Y\right\} \\
- & = & C^{4}P_{Z}\rho P_{Z}+S^{4}\hat{P_{Z,odd}}\rho\hat{P_{Z,odd}}\\
- &  & +iC^{3}S\left[P_{Z}\rho P_{Z,odd}Y-P_{Z}\rho P_{Z}Y+YP_{Z}\rho P_{Z}-YP_{Z,odd}\rho P_{Z}\right]\\
- &  & +C^{2}S^{2}[P_{Z}\rho P_{Z,odd}+P_{Z,odd}\rho P_{Z}-YP_{Z}\rho P_{Z,odd}Y+YP_{Z,odd}\rho P_{Z,odd}Y\\
- &  & \ \ \ \ \ \ \ \ \ \  \  +YP_{Z}\rho P_{Z}Y -YP_{Z,odd}\rho P_{Z}Y]\\
- &  & +iCS^{3}\left[P_{Z,odd}\rho P_{Z,odd}Y-P_{Z,odd}\rho P_{Z}Y+YP_{Z}\rho P_{Z,odd}-YP_{Z,odd}\rho P_{Z,odd}\right]\end{eqnarray*}
-Label $\rho_{even}=P_{Z}\rho P_{Z}$, and $\rho_{odd}=P_{Z,odd}\rho P_{Z,odd}$,
-then 
-
-\begin{eqnarray*}
-\rho_{measured} & = & \int q\left(\theta\right)P\left(\theta\right)\rho P\left(\theta\right)d\theta\\
- &  & C^{4}\rho_{even}+S^{4}\rho_{odd}\\
- &  & +iC^{3}S\left[-\rho_{even}Y+Y\rho_{even}-YP_{Z,odd}\rho P_{Z}+P_{Z}\rho P_{Z,odd}Y\right]\\
- &  & +C^{2}S^{2}\left[Y\rho_{odd}Y+Y\rho_{even}Y+P_{Z}\rho P_{Z,odd}+P_{Z,odd}\rho P_{Z}-YP_{Z}\rho P_{Z,odd}Y-YP_{Z,odd}\rho P_{Z}Y\right]\\
- &  & +iCS^{3}\left[-Y\rho_{odd}+\rho_{odd}Y-P_{Z,odd}\rho P_{Z}Y+YP_{Z}\rho P_{Z,odd}\right]\end{eqnarray*}
-
-
-
-\subsection*{Assume $q\left(\theta\right)$ is symmetric about $\theta=0$}
-
-Now all the assymetric terms in the integral vanish, and we are left
-with
-
-\begin{eqnarray*}
-\rho_{measured} & = & \int q\left(\theta\right)\{C^{4}\rho_{even}+S^{4}\rho_{odd}+C^{2}S^{2}\left[Y\rho_{odd}Y+Y\rho_{even}Y\right]\\
- &  & +C^{2}S^{2}\left[P_{Z}\rho P_{Z,odd}+P_{Z,odd}\rho P_{Z}-YP_{Z}\rho P_{Z,odd}Y-YP_{Z,odd}\rho P_{Z}Y\right]\}d\theta\end{eqnarray*}
-
-
-Apply Z with 50\% probability - this introduces a sign in any $P_{Z,odd}$
-operations, then the second line of terms in the equation above cancel
-to leave: 
+Defining $C=\cos\frac{\theta}{2}$ and $S=\sin\frac{\theta}{2}$, we can write this explicitly as,
 
 \[
-\rho_{measured}=\mbox{\ensuremath{\left[\int q\left(\theta\right)C^{4}d\theta\right]}}\rho_{even}+\left[\int q\left(\theta\right)S^{4}d\theta\right]\rho_{odd}+\left[\int q\left(\theta\right)C^{2}S^{2}d\theta\right]\left[Y\rho_{odd}Y+Y\rho_{even}Y\right]\]
+P\left(\theta\right)  =  C^{2}P_{Z}+S^{2}YP_{Z}Y+iSC\left[YP_{Z}-P_{Z}Y\right]
+\]
 
 
-So we can write the resultant channel as a superoperator 
+Using the relationship $P_{Z}Y=YP_{Z,odd}$ we can write,
+
+\begin{equation}
+\label{eq:p_theta}
+P\left(\theta\right)  =  C^{2}P_{Z}+S^{2}P_{Z,odd}+iSCY\left[P_{Z}-P_{Z,odd}\right]
+\end{equation}
+
+%\begin{eqnarray*}
+%P\left(\theta\right) & = & C^{2}P_{Z}+S^{2}P_{Z,odd}+iSCY\left[P_{Z}-P_{Z,odd}\right]\\
+%P\left(\theta\right) & = & C^{2}P_{Z}+S^{2}P_{Z,odd}+iSC\left[P_{Z,odd}-P_{Z}\right]Y\end{eqnarray*}
+
+This operator exactly describes the effect of projecting into the rotated basis. However to understand the effect of 
+errors, we must also include our uncertainty in the value of $\theta$, which is drawn from some probability distribution that
+describes our noise model. If an observed even measurement outcome corresponds to the projector $P\left(\theta\right)$ being 
+applied to the state with probability $q\left(\theta\right)$ then we obtain the density matrix describing the output state after 
+this noisy measurement by integrating over this distribution.
+
+\begin{eqnarray*}
+\rho_{measured} & = & \int_{\theta} q\left(\theta\right)P\left(\theta\right)\rho P\left(\theta\right)d\theta\\
+\end{eqnarray*}
+
+Using equation~\ref{eq:p_theta}, we can then write:
 
 \[
-\mathcal{S}\left(\rho\right)=\sum p_{i}K_{i}\rho K_{i}^{\dagger}\]
+\rho_{measured}  = \int_{\theta} q(\theta) \left[ C^{4} \rho_1 + iC^{3}S \rho_2 +C^{2}S^{2} \rho_3 +iCS^{3} \rho_4 + S^{4} \rho_5 \right] d\theta
+\]
+ 
+Where the five terms are given by,
+ 
+ \begin{eqnarray*}
+ \rho_1 & = & \rho_{even}\\
+ \rho_2 & = & -\rho_{even}Y+Y\rho_{even}-YP_{Z,odd}\rho P_{Z}+P_{Z}\rho P_{Z,odd}Y\\
+ \rho_3 & = & Y\rho_{odd}Y+Y\rho_{even}Y+P_{Z}\rho P_{Z,odd}+P_{Z,odd}\rho P_{Z}-YP_{Z}\rho P_{Z,odd}Y-YP_{Z,odd}\rho P_{Z}Y\\
+ \rho_4 & = & -Y\rho_{odd}+\rho_{odd}Y-P_{Z,odd}\rho P_{Z}Y+YP_{Z}\rho P_{Z,odd}\\
+ \rho_5 & = & \rho_{odd}
+ \end{eqnarray*}
 
+and we have used the definitions: $\rho_{even}=P_{Z}\rho P_{Z}$, and $\rho_{odd}=P_{Z,odd}\rho P_{Z,odd}$.
 
-With the following probabilities and Kraus operators: 
+%\begin{eqnarray*}
+%\rho_{measured} & = & \int q\left(\theta\right)P\left(\theta\right)\rho P\left(\theta\right)d\theta\\
+% &  & C^{4}\rho_{even}+S^{4}\rho_{odd}\\
+% &  & +iC^{3}S\left[-\rho_{even}Y+Y\rho_{even}-YP_{Z,odd}\rho P_{Z}+P_{Z}\rho P_{Z,odd}Y\right]\\
+% &  & +C^{2}S^{2}\left[Y\rho_{odd}Y+Y\rho_{even}Y+P_{Z}\rho P_{Z,odd}+P_{Z,odd}\rho P_{Z}-YP_{Z}\rho P_{Z,odd}Y-YP_{Z,odd}\rho P_{Z}Y\right]\\
+% &  & +iCS^{3}\left[-Y\rho_{odd}+\rho_{odd}Y-P_{Z,odd}\rho P_{Z}Y+YP_{Z}\rho P_{Z,odd}\right]\end{eqnarray*}
+%
 
+% \begin{eqnarray*}
+% A & = & C^{4}P_{Z}\rho P_{Z}+S^{4}\hat{P_{Z,odd}}\rho\hat{P_{Z,odd}}\\
+% B & = & iC^{3}S\left[P_{Z}\rho P_{Z,odd}Y-P_{Z}\rho P_{Z}Y+YP_{Z}\rho P_{Z}-YP_{Z,odd}\rho P_{Z}\right]\\
+% C & = & C^{2}S^{2}[P_{Z}\rho P_{Z,odd}+P_{Z,odd}\rho P_{Z}-YP_{Z}\rho P_{Z,odd}YY\\
+% &  & \ \ \ \ \ \ \ \ \ \  \  +YP_{Z,odd}\rho P_{Z,odd}+YP_{Z}\rho P_{Z}Y -YP_{Z,odd}\rho P_{Z}Y]\\
+% D & = & iCS^{3}\left[P_{Z,odd}\rho P_{Z,odd}Y-P_{Z,odd}\rho P_{Z}Y+YP_{Z}\rho P_{Z,odd}-YP_{Z,odd}\rho P_{Z,odd}\right]
+% \end{eqnarray*}
+% 
+ 
+%\begin{eqnarray*}
+%\rho_{measured} & = & \int q\left(\theta\right)R^{\dagger}\left(\theta\right)P_{Z}R\left(\theta\right)\rho R^{\dagger}\left(\theta\right)P_{Z}R\left(\theta\right)d%%\theta\end{eqnarray*}
+
+To understand how these erroneous terms manifest themselves in our final density matrix after projection, we must consider the nature of our distribution of errors, $q(\theta)$. We first find the form of the errors in the case that $q(\theta)$ is symmetric, and has no systematic component. Later, we will show how this result can be straightforwardly extended to the case of systematic errors. 
+
+When $q(\theta)$ is symmetric about $\theta=0$ the asymmetric terms in the integral, $\rho_2$ and $\rho_4$, vanish, and we are left
+with,
+
+%\begin{eqnarray*}
+%\rho_{measured} & = & \int q\left(\theta\right)\{C^{4}\rho_{even}+S^{4}\rho_{odd}+C^{2}S^{2}\left[Y\rho_{odd}Y+Y\rho_{even}Y\right]\\
+% &  & +C^{2}S^{2}\left[P_{Z}\rho P_{Z,odd}+P_{Z,odd}\rho P_{Z}-YP_{Z}\rho P_{Z,odd}Y-YP_{Z,odd}\rho P_{Z}Y\right]\}d\theta\end{eqnarray*}
+
+\[
+\rho_{measured}  = \int_{\theta} q(\theta) \left[ C^{4} \rho_1 +C^{2}S^{2} \rho_3 + S^{4} \rho_5 \right] d\theta
+\]
+ 
+The remaining terms in the integral, can all be easily understood physically, with the exception of $\rho_3$, which contains terms such as $P_{Z,odd}\rho P_{Z}$. By applying a Z gate to the qubit with 50\% probability, we split the density matrix into a sum of two parts, where these terms have opposite signs in each part. Overall then these problematic terms now cancel, leaving us with a form which can be more straightforwardly simulated. 
+% What actually does this correspond to physically? Can we say that it would actually be bad to leave these here, and not just that they are difficult to simulate?
+
+Under these conditions, the noisy measurement can then be written as a superoperator,
+
+\[
+\mathcal{S}\left(\rho\right)=\sum p_{i}K_{i}\rho K_{i}^{\dagger}
+\]
+
+Where the Kraus operators, $K_i$, are given by the remaining terms of $\rho_1$, $\rho_3$ and $\rho_5$, and the probabilities, $p_i$, are found by integrating the constants over $q(\theta)$. These are summarized in table~\ref{table:superoperator}.
+
+%\[
+%\rho_{measured} = A \rho_{odd} + B \rho_{even} + C \left[ Y\rho_{odd}Y+Y\rho_{even}Y\right]
+%\]
+%
+%Where,
+%
+% \begin{eqnarray*}
+% A & = & \int q\left(\theta\right)C^{4}d\theta \\
+% B & = & \int q\left(\theta\right)S^{4}d\theta \\
+% C & = & \int q\left(\theta\right)C^{2}S^{2}d\theta \\
+% \end{eqnarray*}
+%
+%
+%
+%
+%So we can write the resultant channel as a superoperator 
+%
+\label{table:superoperator}
 \begin{tabular}{|c|c|}
 \hline 
  & \tabularnewline
 \hline
 \hline 
-$p_{9}=\mbox{\ensuremath{\left[\int q\left(\theta\right)C^{4}d\theta\right]}}$ & $K_{0}=P_{Z}$\tabularnewline
+$p_{0}=\mbox{\ensuremath{\left[\int q\left(\theta\right)C^{4}d\theta\right]}}$ & $K_{0}=P_{Z}$\tabularnewline
 \hline 
 $p_{1}=\left[\int q\left(\theta\right)S^{4}d\theta\right]$ & $K_{1}=P_{Z,odd}$\tabularnewline
 \hline 
@@ -140,4 +191,29 @@ where a fixed rotation is followed by an application of random errors
 which average to zero. 
 
 
+
+\bibstyle{plain}
+\begin{thebibliography}{60}
+
+
+\end{thebibliography}
+
+
+
+
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
