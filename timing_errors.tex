@@ -152,21 +152,31 @@ Where the Kraus operators, $K_i$, are given by the remaining terms of $\rho_1$, 
 %
 %So we can write the resultant channel as a superoperator 
 %
+
+
+\begin{figure}
+\includegraphics[width=0.4\textwidth]{single_qubit_plots_1.pdf}
+\caption{Magnitude of the terms of the super operator under a) Normally distributed noise b) uniformly distributed noise. The solid lines show the value calculated directly from the integrals in the summary table. Data points show the results of simulation over $10^4$ trials, where the value of $\theta$ was sampled from the distribution $q(\theta)$ in each trial. Red data points show the remaining amplitude of the simulated density matrix, not described by any of the four Kraus operators. This is vanishingly small, reinforcing that the model is a full description of the resulting errors.}
 \label{table:superoperator}
-\begin{tabular}{|c|c|}
-\hline 
- & \tabularnewline
-\hline
-\hline 
-$p_{0}=\mbox{\ensuremath{\left[\int q\left(\theta\right)C^{4}d\theta\right]}}$ & $K_{0}=P_{Z}$\tabularnewline
-\hline 
-$p_{1}=\left[\int q\left(\theta\right)S^{4}d\theta\right]$ & $K_{1}=P_{Z,odd}$\tabularnewline
-\hline 
-$p_{2}=\left[\int q\left(\theta\right)C^{2}S^{2}d\theta\right]$ & $K_{2}=YP_{Z,odd}$\tabularnewline
-\hline 
-$p_{3}=\left[\int q\left(\theta\right)C^{2}S^{2}d\theta\right]$ & $K_{3}=YP_{Z}$\tabularnewline
-\hline
-\end{tabular}
+\end{figure}
+
+%
+%
+%\label{table:superoperator}
+%\begin{tabular}{|c|c|}
+%\hline 
+% & \tabularnewline
+%\hline
+%\hline 
+%$p_{0}=\mbox{\ensuremath{\left[\int q\left(\theta\right)C^{4}d\theta\right]}}$ & $K_{0}=P_{Z}$\tabularnewline
+%\hline 
+%$p_{1}=\left[\int q\left(\theta\right)S^{4}d\theta\right]$ & $K_{1}=P_{Z,odd}$\tabularnewline
+%\hline 
+%$p_{2}=\left[\int q\left(\theta\right)C^{2}S^{2}d\theta\right]$ & $K_{2}=YP_{Z,odd}$\tabularnewline
+%\hline 
+%$p_{3}=\left[\int q\left(\theta\right)C^{2}S^{2}d\theta\right]$ & $K_{3}=YP_{Z}$\tabularnewline
+%\hline
+%\end{tabular}
 
 
 \subsection{Case of systematic errors }
